@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start -p 443",
     "lint": "next lint",
-    "dev:https": "NODE_ENV=development node server.js"
+    "start:https": "NODE_ENV=production node server.js"
   },
   "dependencies": {
     "react": "^19.0.0",
