@@ -12,7 +12,7 @@ export default function ProjectsPage() {
     {
       title: 'Singing Portfolio Website',
       description: 'This Next.js app showcases my singing performances and blog, styled with animations and deployed via Docker.',
-      link: 'https://github.com/trinavbanerjee/singing-portfolio'
+      link: 'https://github.com/tbanerj/portfolio'
     },
   ];
 
