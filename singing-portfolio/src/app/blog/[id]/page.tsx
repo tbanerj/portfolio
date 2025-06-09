@@ -10,14 +10,14 @@ interface BlogPost {
   content: string;
 }
 
-export async function generateStaticParams() {
+export function generateStaticParams() {
   const filePath = path.join(process.cwd(), 'public', 'blogs.json');
   const fileContent = fs.readFileSync(filePath, 'utf-8');
   const posts: BlogPost[] = JSON.parse(fileContent);
   return posts.map(post => ({ id: post.id }));
 }
 
-export default async function BlogPostPage({ params }: { params: { id: string } }) {
+export default function BlogPostPage({ params }: { params: { id: string } }) {
   const filePath = path.join(process.cwd(), 'public', 'blogs.json');
   const fileContent = fs.readFileSync(filePath, 'utf-8');
   const posts: BlogPost[] = JSON.parse(fileContent);
