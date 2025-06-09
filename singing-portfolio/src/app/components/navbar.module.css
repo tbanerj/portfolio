@@ -9,14 +9,10 @@
   position: sticky;
   top: 0;
   z-index: 100;
-  background-color: inherit;
+  background-color: #ffffff;
   box-sizing: border-box;
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
   transition: background-color 0.3s ease, border-color 0.3s ease;
-}
-
-.dark-mode .navbar {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* ====== Logo ====== */
@@ -28,10 +24,6 @@
   text-decoration: none;
 }
 
-.dark-mode .logo {
-  color: #4ea8ff;
-}
-
 /* ====== Right Links ====== */
 .right {
   display: flex;
@@ -41,13 +33,12 @@
 .right a {
   font-size: 1rem;
   font-weight: 500;
-  color: inherit;
+  color: #111;
   text-decoration: none;
   position: relative;
   transition: color 0.2s ease-in-out;
 }
 
-/* Hover underline */
 .right a::after {
   content: '';
   position: absolute;
@@ -67,21 +58,9 @@
   color: #0070f3;
 }
 
-.dark-mode .right a:hover {
-  color: #4ea8ff;
-}
-
-.dark-mode .right a::after {
-  background: #4ea8ff;
-}
-
 .active {
   color: #0070f3;
   font-weight: 600;
-}
-
-.dark-mode .active {
-  color: #4ea8ff;
 }
 
 /* ====== Hamburger Menu Button ====== */
@@ -97,16 +76,12 @@
   transition: color 0.3s ease;
 }
 
-.dark-mode .menuButton {
-  color: #f2f2f2;
+.menuButton svg {
+  stroke: #111;
 }
 
 .menuButton:hover {
   color: #0070f3;
-}
-
-.dark-mode .menuButton:hover {
-  color: #4ea8ff;
 }
 
 @media screen and (max-width: 768px) {
@@ -116,7 +91,6 @@
     padding: 1rem 1.5rem;
   }
 
-  /* Wrap logo and button into top row */
   .navbarTop {
     display: flex;
     justify-content: space-between;

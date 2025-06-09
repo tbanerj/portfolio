@@ -19,11 +19,19 @@ export default function Navbar() {
           Trinav Banerjee
         </Link>
         <button className={styles.menuButton} onClick={toggleMenu} aria-label="Toggle menu">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-               strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <line x1="3" y1="12" x2="21" y2="12"></line>
-            <line x1="3" y1="6" x2="21" y2="6"></line>
-            <line x1="3" y1="18" x2="21" y2="18"></line>
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <line x1="3" y1="12" x2="21" y2="12" />
+            <line x1="3" y1="6" x2="21" y2="6" />
+            <line x1="3" y1="18" x2="21" y2="18" />
           </svg>
         </button>
       </div>
@@ -32,12 +40,15 @@ export default function Navbar() {
         <Link href="/videos">
           <span className={pathname === '/videos' ? styles.active : ''}>Videos</span>
         </Link>
+        <Link href="/projects">
+          <span className={pathname === '/projects' ? styles.active : ''}>Projects</span>
+        </Link>
         <Link href="/blog">
           <span className={pathname === '/blog' ? styles.active : ''}>Blog</span>
         </Link>
-        <a href="mailto:trinavbanerjee7@gmail.com" className={styles.rightLink}>
-          Contact
-        </a>        
+        <Link href="/contact">
+          <span className={pathname === '/contact' ? styles.active : ''}>Contact</span>
+        </Link>
       </div>
     </nav>
   );
