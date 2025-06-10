@@ -11,8 +11,18 @@ export default function ProjectsPage() {
   const projects = [
     {
       title: 'Singing Portfolio Website',
-      description: 'This Next.js app showcases my singing performances and blog, styled with animations and deployed via Docker.',
+      description: 'This Next.js app showcases my singing performances and blog, styled with animations.',
       link: 'https://github.com/tbanerj/portfolio'
+    },
+    {
+      title: 'Python GPA Calculator',
+      description: 'A Python script that calculates GPA based on user input, featuring a simple web gui.',
+      link: 'https://github.com/tbanerj/GPACALC'
+    },
+    {
+      title: 'AI Tic-Tac-Toe',
+      description: 'A Python-based Tic-Tac-Toe game that uses AI to play against the user, showcasing basic AI algorithms.',
+      link: 'https://github.com/tbanerj/cs50aiprojects'
     },
   ];
 
