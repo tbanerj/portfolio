@@ -24,6 +24,11 @@ export default function ProjectsPage() {
       description: 'A Python-based Tic-Tac-Toe game that uses AI to play against the user, showcasing basic AI algorithms.',
       link: 'https://github.com/tbanerj/cs50aiprojects'
     },
+    {
+      title: 'Jackson High School NHS Website',
+      description: 'A static website for the National Honor Society at Jackson High School, built with HTML, CSS and Next.js.',
+      link: 'https://github.com/AbhGow07/NHS.Website'
+    },
   ];
 
   return (
@@ -35,14 +40,49 @@ export default function ProjectsPage() {
         minHeight: '100vh'
       }}
     >
-      <h1 style={{
-        fontSize: '2.5rem',
-        fontWeight: 700,
-        textAlign: 'center',
+      <div style={{
+        maxWidth: '900px',
+        margin: '0 auto',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        gap: '1rem',
         marginBottom: '2.5rem'
       }}>
-        💻 Projects
-      </h1>
+        <h1 style={{
+          fontSize: '2.5rem',
+          fontWeight: 700,
+          textAlign: 'center'
+        }}>
+          💻 Projects
+        </h1>
+        <a
+          href="https://github.com/tbanerj"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            background: 'linear-gradient(135deg, #4a90e2, #0070f3)',
+            color: '#fff',
+            padding: '0.5rem 1rem',
+            borderRadius: '8px',
+            fontWeight: 500,
+            fontSize: '0.95rem',
+            textDecoration: 'none',
+            boxShadow: '0 4px 12px rgba(0, 112, 243, 0.2)',
+            transition: 'transform 0.2s ease, box-shadow 0.2s ease'
+          }}
+          onMouseEnter={e => {
+            e.currentTarget.style.transform = 'translateY(-2px)';
+            e.currentTarget.style.boxShadow = '0 6px 16px rgba(0, 112, 243, 0.3)';
+          }}
+          onMouseLeave={e => {
+            e.currentTarget.style.transform = 'translateY(0)';
+            e.currentTarget.style.boxShadow = '0 4px 12px rgba(0, 112, 243, 0.2)';
+          }}
+        >
+          Visit My GitHub Profile!
+        </a>
+      </div>
 
       <div style={{
         maxWidth: '900px',

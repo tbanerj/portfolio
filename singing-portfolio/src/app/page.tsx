@@ -19,7 +19,7 @@ export default function Home() {
           <div><strong>∞</strong> Passion</div>
         </div>
         <div className={styles.links}>
-          <a href="/videos">🎤 Singing Videos</a>
+          <a href="/performances">🎤 Singing Videos</a>
           <a href="/projects">💻 Coding Projects</a>
         </div>
       </div>

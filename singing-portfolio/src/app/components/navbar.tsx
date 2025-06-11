@@ -37,8 +37,8 @@ export default function Navbar() {
       </div>
 
       <div className={`${styles.right} ${menuOpen ? styles.open : ''}`}>
-        <Link href="/videos">
-          <span className={pathname === '/videos' ? styles.active : ''}>Videos</span>
+        <Link href="/performances">
+          <span className={pathname === '/performances' ? styles.active : ''}>Performances</span>
         </Link>
         <Link href="/projects">
           <span className={pathname === '/projects' ? styles.active : ''}>Projects</span>
