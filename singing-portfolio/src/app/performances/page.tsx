@@ -51,6 +51,7 @@ export default function VideosPage() {
         <meta name="description" content="Watch performances by Trinav Banerjee" />
       </Head>
 
+      {/* Title + Profile Button */}
       <div style={{
         maxWidth: '900px',
         margin: '0 auto',
@@ -95,17 +96,18 @@ export default function VideosPage() {
         </a>
       </div>
 
+      {/* Video List */}
       <div style={{
         maxWidth: '900px',
         margin: '0 auto',
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-        gap: '2rem',
-        justifyItems: 'center'
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '2rem'
       }}>
         {videos.map((video, index) => (
           <div
             key={index}
+            className="popUp"
             style={{
               borderRadius: '16px',
               overflow: 'hidden',
@@ -118,7 +120,7 @@ export default function VideosPage() {
           >
             <iframe
               width="100%"
-              height="230"
+              height="360"
               src={video.url}
               title={video.title}
               frameBorder="0"
