@@ -16,17 +16,17 @@ export default function ProjectsPage() {
     },
     {
       title: 'Python GPA Calculator',
-      description: 'A Python script that calculates GPA based on user input, featuring a simple web gui.',
+      description: 'A Python script that calculates GPA based on user input, featuring a simple web GUI.',
       link: 'https://github.com/tbanerj/GPACALC'
     },
     {
       title: 'AI Tic-Tac-Toe',
-      description: 'A Python-based Tic-Tac-Toe game that uses AI to play against the user, showcasing basic AI algorithms.',
+      description: 'A Python-based Tic-Tac-Toe game using basic AI algorithms to challenge the player.',
       link: 'https://github.com/tbanerj/cs50aiprojects'
     },
     {
       title: 'Jackson High School NHS Website',
-      description: 'A static website for the National Honor Society at Jackson High School, built with HTML, CSS and Next.js.',
+      description: 'A static site for JHS NHS built with HTML, CSS, and Next.js for clean presentation.',
       link: 'https://github.com/AbhGow07/NHS.Website'
     },
   ];
@@ -47,7 +47,7 @@ export default function ProjectsPage() {
         flexDirection: 'column',
         alignItems: 'center',
         gap: '1rem',
-        marginBottom: '2.5rem'
+        marginBottom: '3rem'
       }}>
         <h1 style={{
           fontSize: '2.5rem',
@@ -87,18 +87,30 @@ export default function ProjectsPage() {
       <div style={{
         maxWidth: '900px',
         margin: '0 auto',
-        display: 'grid',
+        display: 'flex',
+        flexDirection: 'column',
         gap: '2rem'
       }}>
         {projects.map((proj, index) => (
           <div
             key={index}
-            className="popUp"
             style={{
               background: 'white',
               padding: '2rem',
               borderRadius: '16px',
-              boxShadow: '0 4px 20px rgba(0,0,0,0.1)'
+              boxShadow: '0 12px 32px rgba(0,0,0,0.1)',
+              transform: 'translateY(20px)',
+              opacity: 0,
+              animation: `fadeSlideIn 0.6s ease forwards ${index * 0.15}s`,
+              transition: 'transform 0.2s ease, box-shadow 0.2s ease'
+            }}
+            onMouseEnter={e => {
+              e.currentTarget.style.transform = 'translateY(-4px)';
+              e.currentTarget.style.boxShadow = '0 16px 40px rgba(0,0,0,0.12)';
+            }}
+            onMouseLeave={e => {
+              e.currentTarget.style.transform = 'translateY(0)';
+              e.currentTarget.style.boxShadow = '0 12px 32px rgba(0,0,0,0.1)';
             }}
           >
             <h2 style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>{proj.title}</h2>
@@ -122,6 +134,15 @@ export default function ProjectsPage() {
           </div>
         ))}
       </div>
+
+      <style jsx>{`
+        @keyframes fadeSlideIn {
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+      `}</style>
     </main>
   );
 }

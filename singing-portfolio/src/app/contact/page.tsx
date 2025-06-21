@@ -42,7 +42,6 @@ export default function ContactPage() {
           <li><strong>Email:</strong> <a href="mailto:trinavbanerjee7@gmail.com">trinavbanerjee7@gmail.com</a></li>
           <li><strong>Phone:</strong> <a href="tel:+14252159857">(425) 215-9857</a></li>
           <li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/trinavbanerjee" target="_blank" rel="noopener noreferrer">linkedin.com/in/trinavbanerjee</a></li>
-          <li><strong>Instagram:</strong> <a href="https://instagram.com/triinav" target="_blank" rel="noopener noreferrer">@triinav</a></li>
         </ul>
 
         <div style={{ marginTop: '2rem', textAlign: 'center' }}>
