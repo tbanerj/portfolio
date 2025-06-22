@@ -54,7 +54,7 @@ export default function ProjectsPage() {
           fontWeight: 700,
           textAlign: 'center'
         }}>
-          💻 Projects
+          Projects
         </h1>
         <a
           href="https://github.com/tbanerj"

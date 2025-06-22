@@ -87,7 +87,7 @@ export default function VideosPage() {
           fontWeight: 700,
           textAlign: 'center'
         }}>
-          🎤 Singing Performances
+          Performances
         </h1>
         <a
           href="https://www.csmusic.net/artists/details/YXJ0aXN0cyU1QmlkJTVEPTVlYjNkZThmLWFhZTEtNDI5OS1hMDRlLTgwZjlkYzMwYTRjYw=="

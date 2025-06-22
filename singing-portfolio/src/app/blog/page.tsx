@@ -21,7 +21,7 @@ export default function BlogPage() {
 
   return (
     <main className={styles.container} style={{ padding: '5rem 2rem', background: 'linear-gradient(to right, #ffffff, #f0f8ff)', minHeight: '100vh' }}>
-      <h1 style={{ fontSize: '2.5rem', fontWeight: 700, textAlign: 'center', marginBottom: '3rem' }}>📝 Blog</h1>
+      <h1 style={{ fontSize: '2.5rem', fontWeight: 700, textAlign: 'center', marginBottom: '3rem' }}>Blog</h1>
       <div style={{
         maxWidth: '900px',
         margin: '0 auto',

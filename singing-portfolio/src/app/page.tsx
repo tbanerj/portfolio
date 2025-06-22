@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <main className={styles.main}>
       <div className={styles.textSection}>
-        <h1 className={styles.title}>Hey, I'm Trinav</h1>
+        <h1 className={styles.title}>Hey, I'm Trinav Banerjee</h1>
         <p className={styles.subtitle}>
           I’m a passionate vocalist and aspiring computer scientist, blending music and technology to create meaningful experiences.
         </p>
@@ -19,8 +19,8 @@ export default function Home() {
           <div><strong>∞</strong> Passion</div>
         </div>
         <div className={styles.links}>
-          <a href="/performances">🎤 Singing Videos</a>
-          <a href="/projects">💻 Coding Projects</a>
+          <a href="/performances">Performances</a>
+          <a href="/projects">Projects</a>
         </div>
       </div>
       <div className={styles.imageSection}>

@@ -13,11 +13,11 @@ export default function Head() {
       <link rel="icon" type="image/png" href="/favicon.png" />
 
       {/* Open Graph for link previews */}
-      <meta property="og:title" content="Trinav Banerjee | Vocalist & Creative Technologist" />
-      <meta property="og:description" content="Singing videos, blog posts, and creative projects by Trinav Banerjee." />
-      <meta property="og:type" content="website" />
+      <meta property="og:title" content="Trinav Banerjee Portfolio" />
+      <meta property="og:description" content="A showcase of Trinav Banerjee's vocal performances, projects, and blogs." />
       <meta property="og:url" content="https://trinavbanerjee.com" />
-      <meta property="og:image" content="https://trinavbanerjee.com/favicon.png" />
+      <meta property="og:type" content="website" />
+      <meta property="og:image" content="https://trinavbanerjee.com/preview.png" />
 
       {/* Twitter Card */}
       <meta name="twitter:card" content="summary_large_image" />
