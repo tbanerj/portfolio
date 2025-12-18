@@ -77,8 +77,7 @@ docker build -t trinav-portfolio .
 ### 2. Run the container
 
 ```bash
-docker run -p 3000:3000 trinav-portfolio
-```
+docker run -d -p 3000:443 trinav-portfolio```
 
 > Open [http://localhost:3000](http://localhost:3000) in your browser
 
@@ -99,6 +98,203 @@ docker run -p 3000:3000 trinav-portfolio
 npm run build
 npm run start
 ```
+
+# Full Production Setup Guide (Nginx + HTTPS + Next.js)
+
+This document contains the complete step-by-step process to run a Next.js app
+behind Nginx with HTTPS using a custom SSL certificate.
+
+Domain: trinavbanerjee.com  
+App port: 3000  
+HTTPS port: 443  
+
+---
+
+## Step 1: Stop all running services
+
+```bash
+sudo pkill -f next-server
+sudo systemctl stop nginx
+```
+
+Verify no services are listening on ports 443 or 3000:
+
+```bash
+ss -tulpn | grep -E ":(443|3000)"
+```
+
+---
+
+## Step 2: Create SSL directory
+
+```bash
+sudo mkdir -p /etc/nginx/ssl/trinavbanerjee.com
+```
+
+---
+
+## Step 3: Move SSL certificate and private key
+
+```bash
+sudo mv ~/portfolio/singing-portfolio/certs/server.cer /etc/nginx/ssl/trinavbanerjee.com/
+sudo mv ~/portfolio/singing-portfolio/certs/server.key /etc/nginx/ssl/trinavbanerjee.com/
+sudo chmod 600 /etc/nginx/ssl/trinavbanerjee.com/server.key
+```
+
+---
+
+## Step 4: Add CA bundle from certificate provider
+
+Download the intermediate certificate (CA bundle) from your certificate provider.
+
+Move it into the SSL directory:
+
+```bash
+sudo mv ca_bundle.crt /etc/nginx/ssl/trinavbanerjee.com/
+```
+
+---
+
+## Step 5: Build the full certificate chain
+
+```bash
+cd /etc/nginx/ssl/trinavbanerjee.com
+sudo cat server.cer ca_bundle.crt > fullchain.pem
+```
+
+The order is important: server certificate first, CA bundle second.
+
+---
+
+## Step 6: Configure Nginx
+
+Edit the Nginx site configuration:
+
+```bash
+sudo nano /etc/nginx/sites-available/myapp
+```
+
+Replace the entire file with the following configuration:
+
+```nginx
+server {
+    listen 443 ssl http2;
+    server_name trinavbanerjee.com www.trinavbanerjee.com;
+
+    ssl_certificate     /etc/nginx/ssl/trinavbanerjee.com/fullchain.pem;
+    ssl_certificate_key /etc/nginx/ssl/trinavbanerjee.com/server.key;
+
+    ssl_protocols TLSv1.2 TLSv1.3;
+
+    location / {
+        proxy_pass http://localhost:3000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-Proto https;
+    }
+}
+
+server {
+    listen 80;
+    server_name trinavbanerjee.com www.trinavbanerjee.com;
+    return 301 https://$host$request_uri;
+}
+```
+
+Save and exit the editor.
+
+---
+
+## Step 7: Disable unused Nginx configs
+
+```bash
+sudo rm /etc/nginx/sites-enabled/default
+```
+
+Confirm only one site is enabled:
+
+```bash
+ls -l /etc/nginx/sites-enabled
+```
+
+---
+
+## Step 8: Test and start Nginx
+
+```bash
+sudo nginx -t
+sudo systemctl start nginx
+```
+
+---
+
+## Step 9: Start Next.js on port 3000
+
+```bash
+cd ~/portfolio/singing-portfolio
+PORT=3000 nohup npm run start &
+```
+
+---
+
+## Step 10: Verify ports
+
+```bash
+ss -tulpn | grep -E ":(443|3000)"
+```
+
+Expected results:
+- Port 443 handled by nginx
+- Port 3000 handled by next-server
+
+---
+
+## Step 11: Verify HTTPS
+
+```bash
+curl -I https://trinavbanerjee.com
+```
+
+The response should not contain SSL errors.
+
+---
+
+## Step 12: Browser verification
+
+Open the site in a browser:
+
+https://trinavbanerjee.com
+
+The page should load securely over HTTPS.
+
+---
+
+## Restarting the website
+
+### Restart Next.js
+
+```bash
+sudo pkill -f next-server
+PORT=3000 nohup npm run start &
+```
+
+### Reload Nginx
+
+```bash
+sudo systemctl reload nginx
+```
+
+---
+
+## Notes
+
+- Nginx must be the only service listening on port 443.
+- Next.js must run on port 3000.
+- The fullchain.pem file must include intermediate certificates.
+- This setup does not include automatic certificate renewal.
+- For long-term stability, consider replacing nohup with pm2 or systemd.
 
 ---
 
