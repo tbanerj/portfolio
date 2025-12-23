@@ -64,6 +64,55 @@ npm run dev
 
 > Visit [http://localhost:3000](http://localhost:3000)
 
+NGINX Server
+
+sudo systemctl status nginx
+
+sudo systemctl reload nginx
+
+sudo systemctl restart nginx
+
+
+
+
+
+1. Install PM2 - Ubuntu Production Manager
+
+	sudo npm install pm2 -g
+
+
+
+2. Run the application via PM2
+
+	PORT=3000 pm2 start npm --name portfolio-trinav -- start
+
+
+
+3. Manage all the PM2	
+
+	List all running processes: pm2 ls.
+
+	Monitor logs: pm2 logs my-app-name
+
+	Stop a process: pm2 stop my-app-name
+
+	Restart a process: pm2 restart my-app-name
+
+
+
+4. sudo systemctl reload nginx
+
+
+
+5. Add the startup
+
+
+
+	pm2 startup systemd
+
+	pm2 save
+
+
 ---
 
 ## 🐳 Running with Docker
