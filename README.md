@@ -1,7 +1,4 @@
-# portfolio
-Here’s your complete `README.md` written in proper **Markdown format**:
 
-```md
 # 🎤 Trinav Banerjee – Singing Portfolio
 
 A modern portfolio site built with **Next.js (App Router + TypeScript)** to showcase singing performances and blog posts. Fully styled with responsive design, dark mode support, mobile navigation, and animated page transitions.
