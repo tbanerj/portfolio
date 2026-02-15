@@ -1,169 +1,136 @@
-
 # 🎤 Trinav Banerjee – Singing Portfolio
 
-A modern portfolio site built with **Next.js (App Router + TypeScript)** to showcase singing performances and blog posts. Fully styled with responsive design, dark mode support, mobile navigation, and animated page transitions.
+A modern performance portfolio built with **Next.js (App Router + TypeScript)** to showcase singing performances and blog content.
+
+Designed with:
+
+* Responsive layout
+* Dark mode support
+* Animated page transitions
+* Mobile navigation
+* Production-ready deployment (Nginx + HTTPS + PM2)
 
 ---
 
-## 📁 Project Structure
+# 📁 Project Structure
 
 ```
-
-/public              → Static assets (images, icons, etc.)
+/public                  → Static assets (images, icons)
 /src/app
-/components        → Reusable UI components (Navbar, ThemeWrapper)
-/videos            → Videos page (embedded YouTube grid)
-/blog              → Blog page (coming soon)
-layout.tsx         → Site-wide layout wrapper
-head.tsx           → Metadata and page <title>
-page.tsx           → Home page (hero section, intro)
-globals.css        → Global styles
-page.module.css    → Page-specific shared styles
-Dockerfile           → Production Docker build file
-.dockerignore        → Files to exclude from Docker builds
-
-````
+  /components            → Reusable UI components (Navbar, ThemeWrapper)
+  /videos                → Videos page (YouTube grid)
+  /blog                  → Blog page (placeholder)
+  layout.tsx             → Root layout wrapper
+  head.tsx               → Metadata and <title>
+  page.tsx               → Homepage
+  globals.css            → Global styles
+  page.module.css        → Shared styles
+```
 
 ---
 
-## 🚀 Features
+# 🚀 Features
 
-- 🎤 Embedded YouTube performance videos
-- 🌓 Auto dark/light theme with smooth transitions
-- 📱 Fully responsive and mobile-friendly
-- 🧭 Navbar with animated underline and hamburger menu
-- ✨ Page load animations on every route
-- 📝 Blog page placeholder (“Coming soon”)
-- 📦 Dockerized for deployment
+* 🎤 Embedded YouTube performance grid
+* 🌓 Auto light/dark theme (prefers-color-scheme)
+* 📱 Fully responsive design
+* 🧭 Animated navbar with hamburger menu
+* ✨ Route transition animations
+* 📝 Blog page placeholder
+* 🔐 HTTPS-ready Nginx reverse proxy setup
 
 ---
 
-## 🛠️ Local Development
+# 🛠️ Local Development
 
-### 1. Clone the repo
+## 1. Clone the repository
 
 ```bash
 git clone https://github.com/yourusername/singing-portfolio.git
 cd singing-portfolio
-````
+```
 
-### 2. Install dependencies
+## 2. Install dependencies
 
 ```bash
 npm install
 ```
 
-### 3. Run the dev server
+## 3. Run development server
 
 ```bash
 npm run dev
 ```
 
-> Visit [http://localhost:3000](http://localhost:3000)
+Visit:
 
-NGINX Server
-
-sudo systemctl status nginx
-
-sudo systemctl reload nginx
-
-sudo systemctl restart nginx
-
-
-
-
-
-1. Install PM2 - Ubuntu Production Manager
-
-	sudo npm install pm2 -g
-
-
-
-2. Run the application via PM2
-
-	PORT=3000 pm2 start npm --name portfolio-trinav -- start
-
-
-
-3. Manage all the PM2	
-
-	List all running processes: pm2 ls.
-
-	Monitor logs: pm2 logs my-app-name
-
-	Stop a process: pm2 stop my-app-name
-
-	Restart a process: pm2 restart my-app-name
-
-
-
-4. sudo systemctl reload nginx
-
-
-
-5. Add the startup
-
-
-
-	pm2 startup systemd
-
-	pm2 save
-
-
----
-
-## 🐳 Running with Docker
-
-### 1. Build the Docker image
-
-```bash
-docker build -t trinav-portfolio .
+```
+http://localhost:3000
 ```
 
-### 2. Run the container
-
-```bash
-docker run -d -p 3000:443 trinav-portfolio```
-
-> Open [http://localhost:3000](http://localhost:3000) in your browser
-
 ---
 
-## ✏️ Editing Content
-
-* **Update Videos**: Edit the `videos` array in `src/app/videos/page.tsx`
-* **Change Homepage Text/Image**: Modify `src/app/page.tsx` and replace assets in `/public/`
-* **Global Styles**: Adjust `globals.css` and `page.module.css`
-* **Dark Mode Logic**: Controlled in `themeWrapper.tsx` using `prefers-color-scheme`
-
----
-
-## 📦 Build for Production
+# 📦 Production Build
 
 ```bash
 npm run build
 npm run start
 ```
 
-# Full Production Setup Guide (Nginx + HTTPS + Next.js)
+---
 
-This document contains the complete step-by-step process to run a Next.js app
-behind Nginx with HTTPS using a custom SSL certificate.
+# ⚙️ Process Management with PM2
 
-Domain: trinavbanerjee.com  
-App port: 3000  
-HTTPS port: 443  
+For production stability and auto-restart on crashes.
+
+## Install PM2
+
+```bash
+sudo npm install pm2 -g
+```
+
+## Start app with PM2
+
+```bash
+PORT=3000 pm2 start npm --name portfolio-trinav -- start
+```
+
+## Manage PM2
+
+```bash
+pm2 ls
+pm2 logs portfolio-trinav
+pm2 stop portfolio-trinav
+pm2 restart portfolio-trinav
+```
+
+## Enable startup on reboot
+
+```bash
+pm2 startup systemd
+pm2 save
+```
 
 ---
 
-## Step 1: Stop all running services
+# 🌐 Full Production Setup Guide
+
+## Nginx + HTTPS + Next.js
+
+Domain: `trinavbanerjee.com`
+Next.js Port: `3000`
+HTTPS Port: `443`
+
+---
+
+## Step 1: Stop existing services
 
 ```bash
 sudo pkill -f next-server
 sudo systemctl stop nginx
 ```
 
-Verify no services are listening on ports 443 or 3000:
+Verify no processes are listening:
 
 ```bash
 ss -tulpn | grep -E ":(443|3000)"
@@ -179,7 +146,7 @@ sudo mkdir -p /etc/nginx/ssl/trinavbanerjee.com
 
 ---
 
-## Step 3: Move SSL certificate and private key
+## Step 3: Move SSL Certificate and Key
 
 ```bash
 sudo mv ~/portfolio/singing-portfolio/certs/server.cer /etc/nginx/ssl/trinavbanerjee.com/
@@ -189,11 +156,9 @@ sudo chmod 600 /etc/nginx/ssl/trinavbanerjee.com/server.key
 
 ---
 
-## Step 4: Add CA bundle from certificate provider
+## Step 4: Add CA Bundle
 
-Download the intermediate certificate (CA bundle) from your certificate provider.
-
-Move it into the SSL directory:
+Download intermediate certificate from your certificate provider.
 
 ```bash
 sudo mv ca_bundle.crt /etc/nginx/ssl/trinavbanerjee.com/
@@ -201,26 +166,29 @@ sudo mv ca_bundle.crt /etc/nginx/ssl/trinavbanerjee.com/
 
 ---
 
-## Step 5: Build the full certificate chain
+## Step 5: Build Full Certificate Chain
 
 ```bash
 cd /etc/nginx/ssl/trinavbanerjee.com
 sudo cat server.cer ca_bundle.crt > fullchain.pem
 ```
 
-The order is important: server certificate first, CA bundle second.
+Order matters:
+
+1. Server certificate
+2. CA bundle
 
 ---
 
 ## Step 6: Configure Nginx
 
-Edit the Nginx site configuration:
+Edit:
 
 ```bash
 sudo nano /etc/nginx/sites-available/myapp
 ```
 
-Replace the entire file with the following configuration:
+Replace with:
 
 ```nginx
 server {
@@ -235,6 +203,7 @@ server {
     location / {
         proxy_pass http://localhost:3000;
         proxy_http_version 1.1;
+
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection "upgrade";
         proxy_set_header Host $host;
@@ -249,25 +218,20 @@ server {
 }
 ```
 
-Save and exit the editor.
-
 ---
 
-## Step 7: Disable unused Nginx configs
+## Step 7: Disable Default Site
 
 ```bash
 sudo rm /etc/nginx/sites-enabled/default
-```
-
-Confirm only one site is enabled:
-
-```bash
 ls -l /etc/nginx/sites-enabled
 ```
 
+Only your app should appear.
+
 ---
 
-## Step 8: Test and start Nginx
+## Step 8: Test and Start Nginx
 
 ```bash
 sudo nginx -t
@@ -276,7 +240,7 @@ sudo systemctl start nginx
 
 ---
 
-## Step 9: Start Next.js on port 3000
+## Step 9: Start Next.js
 
 ```bash
 cd ~/portfolio/singing-portfolio
@@ -285,42 +249,16 @@ PORT=3000 nohup npm run start &
 
 ---
 
-## Step 10: Verify ports
+## Step 10: Verify Ports
 
 ```bash
 ss -tulpn | grep -E ":(443|3000)"
 ```
 
-NGNIX Config
-```
-server {
-    listen 443 ssl;
-    server_name yourdomain.com www.yourdomain.com;
+Expected:
 
-    ssl_certificate /etc/letsencrypt/live/yourdomain.com/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/yourdomain.com/privkey.pem;
-
-    location / {
-        proxy_pass http://127.0.0.1:3000;
-        proxy_http_version 1.1;
-
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection "upgrade";
-        proxy_set_header Host $host;
-        proxy_cache_bypass $http_upgrade;
-    }
-}
-
-server {
-    listen 80;
-    server_name yourdomain.com www.yourdomain.com;
-    return 301 https://$host$request_uri;
-}
-```
-
-Expected results:
-- Port 443 handled by nginx
-- Port 3000 handled by next-server
+* Port 443 handled by nginx
+* Port 3000 handled by next-server
 
 ---
 
@@ -330,30 +268,32 @@ Expected results:
 curl -I https://trinavbanerjee.com
 ```
 
-The response should not contain SSL errors.
+There should be no SSL errors.
 
 ---
 
-## Step 12: Browser verification
+## Step 12: Browser Verification
 
-Open the site in a browser:
+Open:
 
+```
 https://trinavbanerjee.com
+```
 
 The page should load securely over HTTPS.
 
 ---
 
-## Restarting the website
+# 🔄 Restarting the Website
 
-### Restart Next.js
+## Restart Next.js
 
 ```bash
 sudo pkill -f next-server
 PORT=3000 nohup npm run start &
 ```
 
-### Reload Nginx
+## Reload Nginx
 
 ```bash
 sudo systemctl reload nginx
@@ -361,26 +301,31 @@ sudo systemctl reload nginx
 
 ---
 
-## Notes
+# 📝 Editing Content
 
-- Nginx must be the only service listening on port 443.
-- Next.js must run on port 3000.
-- The fullchain.pem file must include intermediate certificates.
-- This setup does not include automatic certificate renewal.
-- For long-term stability, consider replacing nohup with pm2 or systemd.
-
----
-
-## 📬 Contact
-
-For inquiries, contact via the **navbar link** or at:
-📧 [trinavbanerjee7@gmail.com](mailto:trinavbanerjee7@gmail.com)
+| Task                    | File Location             |
+| ----------------------- | ------------------------- |
+| Update videos           | `src/app/videos/page.tsx` |
+| Change homepage content | `src/app/page.tsx`        |
+| Replace images          | `/public/`                |
+| Global styles           | `globals.css`             |
+| Theme logic             | `themeWrapper.tsx`        |
 
 ---
 
-Let me know if you’d like to add:
+# ⚠️ Important Notes
 
-* 📝 Markdown-powered blogs
-* 🌐 CI/CD with GitHub Actions
-* ☁️ Deployments to Vercel, Railway, or Render
+* Nginx must be the only service listening on port 443.
+* Next.js must run on port 3000.
+* `fullchain.pem` must include intermediate certificates.
+* This setup does not include automatic certificate renewal.
+* For long-term stability, use PM2 instead of nohup.
 
+---
+
+# 📬 Contact
+
+[trinavbanerjee7@gmail.com](mailto:trinavbanerjee7@gmail.com)
+Or use the website navbar contact link.
+
+---
