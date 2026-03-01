@@ -195,7 +195,7 @@ server {
     listen 443 ssl http2;
     server_name trinavbanerjee.com www.trinavbanerjee.com;
 
-    ssl_certificate     /etc/nginx/ssl/trinavbanerjee.com/fullchain.pem;
+    ssl_certificate     /etc/nginx/ssl/trinavbanerjee.com/server.cer;
     ssl_certificate_key /etc/nginx/ssl/trinavbanerjee.com/server.key;
 
     ssl_protocols TLSv1.2 TLSv1.3;
